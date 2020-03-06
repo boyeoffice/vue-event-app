@@ -1,0 +1,46 @@
+<template>
+  <main>
+  <input type="text" v-model="state.item">
+  <u>
+    <li v-for="(item, i) in state.todos" :key="i">{{item}}</li>
+  </u>
+  <button @click="addItem">Add Item</button>
+  <h1>{{myData}}</h1>
+  </main>
+</template>
+
+<script>
+  import { reactive, computed, onMounted } from '@vue/composition-api'
+  export default {
+    name: 'App',
+    setup() {
+      //console.log(context)
+      const { state, addItem } = useTodoApp()
+      const myData = computed(() => state.todos[0])
+
+      onMounted(() => {
+        //console.log('mounted')
+      })
+      return {
+        state,
+        addItem,
+        myData
+      }
+    }
+  }
+
+  function useTodoApp() {
+    let state = reactive({
+        item: '',
+        todos: []
+      })
+      function addItem() {
+        state.todos.unshift(state.item)
+        state.item = ''
+      }
+      return {
+        state,
+        addItem
+      }
+  }
+</script>
