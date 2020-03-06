@@ -4,12 +4,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import Navbar from './components/Navbar'
-  export default {
+  import Vue from 'vue'
+  export default Vue.extend({
     name: 'App',
     components: {
       Navbar
     }
-  }
+  })
 </script>
